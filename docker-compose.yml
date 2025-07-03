@@ -1,0 +1,10 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app            # Mount your local code into the container
+      - /app/node_modules # Prevent overwriting node_modules
+    environment:
+      - NODE_ENV=development

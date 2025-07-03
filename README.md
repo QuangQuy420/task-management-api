@@ -37,6 +37,10 @@ $ npm install
 # development
 $ npm run start
 
+# development with docker
+$ docker compose up --build
+$ docker compose down
+
 # watch mode
 $ npm run start:dev
 
