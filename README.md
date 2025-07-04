@@ -38,6 +38,12 @@ $ npm install
 $ npm run start
 
 # development with docker
+# First time need to create a migration:
+$ docker compose up db
+$ docker compose run --rm api npx prisma migrate dev --name init
+$ docker compose down
+
+# Another time
 $ docker compose up --build
 $ docker compose down
 

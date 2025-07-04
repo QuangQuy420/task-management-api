@@ -7,4 +7,26 @@ services:
       - .:/app            # Mount your local code into the container
       - /app/node_modules # Prevent overwriting node_modules
     environment:
-      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/taskdb
+    depends_on:
+      - db
+    command: >
+      sh -c "
+        npx prisma migrate dev &&
+        npm run start:dev
+      "
+
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taskdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
